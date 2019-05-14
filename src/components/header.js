@@ -1,42 +1,69 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { Link } from "gatsby"
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  Container,
+} from "reactstrap"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+    this.toggle = this.toggle.bind(this)
+    this.state = {
+      isOpen: false,
+    }
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    })
+  }
+  render() {
+    return (
+      <header>
+        <Container>
+          <Navbar expand="md">
+            <NavbarBrand href="/">Daedalus Staking</NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    Home
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    About Us
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    Our Pool
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    Tech Support
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="btn btn-success">
+                    Start Staking
+                  </Link>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          </Navbar>
+        </Container>
+      </header>
+    )
+  }
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
